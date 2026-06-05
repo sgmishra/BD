@@ -19,6 +19,9 @@ const cryingOverlay = document.querySelector("#cryingOverlay");
 const bgMusic = document.querySelector("#bgMusic");
 const musicSource = bgMusic?.querySelector("source") ?? null;
 const carouselNode = document.querySelector("#memoryCarousel");
+const memoryRoll = document.querySelector(".js-memory-roll");
+const memoryRollShell = document.querySelector(".js-memory-roll-shell");
+const memoryReelTrack = document.querySelector(".js-memory-reel-track");
 const orbNodes = Array.from(document.querySelectorAll("[data-parallax]"));
 
 const memoryCarousel = carouselNode ? bootstrap.Carousel.getOrCreateInstance(carouselNode) : null;
@@ -28,6 +31,7 @@ let enteredCode = "";
 let isTransitioning = false;
 let currentTrack = bgMusic?.dataset.defaultSrc || musicSource?.getAttribute("src") || "";
 let finaleFireworks = null;
+let memoryHighlightFrame = null;
 
 function getScreen(name) {
   return document.querySelector(`[data-screen="${name}"]`);
@@ -209,6 +213,74 @@ function launchCakeFinale() {
   runCakeConfetti();
 }
 
+function setupMemoryReelLoop() {
+  if (!memoryReelTrack || memoryReelTrack.dataset.loopReady === "true") return;
+
+  memoryReelTrack.insertAdjacentHTML("beforeend", memoryReelTrack.innerHTML);
+  memoryReelTrack.dataset.loopReady = "true";
+}
+
+function highlightMemoryRollCenter() {
+  if (!memoryRoll) return;
+
+  const slots = Array.from(memoryRoll.querySelectorAll(".memory-roll-slot"));
+  const rollRect = memoryRoll.getBoundingClientRect();
+  const centerX = rollRect.left + (rollRect.width / 2);
+  const maxDistance = rollRect.width / 2;
+
+  slots.forEach((slot) => {
+    const card = slot.querySelector(".memory-roll-card");
+    if (!card) return;
+
+    const rect = slot.getBoundingClientRect();
+    const slotCenter = rect.left + (rect.width / 2);
+    const distance = Math.abs(slotCenter - centerX);
+    const normalizedDistance = Math.min(distance / maxDistance, 1);
+    const emphasis = 1 - normalizedDistance;
+    const easedEmphasis = emphasis * emphasis * (3 - (2 * emphasis));
+    const scale = 0.72 + (easedEmphasis * 1.28);
+    const opacity = 0.14 + (easedEmphasis * 0.86);
+    const shift = 18 - (easedEmphasis * 18);
+    const zIndex = 1 + Math.round(easedEmphasis * 20);
+
+    card.style.setProperty("--card-scale", scale.toFixed(3));
+    card.style.setProperty("--card-opacity", opacity.toFixed(3));
+    card.style.setProperty("--card-shift", `${shift.toFixed(1)}px`);
+    card.style.setProperty("--card-z", `${zIndex}`);
+  });
+}
+
+function startMemoryHighlightLoop() {
+  if (!memoryRoll || memoryHighlightFrame !== null) return;
+
+  const tick = () => {
+    highlightMemoryRollCenter();
+    memoryHighlightFrame = window.requestAnimationFrame(tick);
+  };
+
+  tick();
+}
+
+function stopMemoryHighlightLoop() {
+  if (memoryHighlightFrame === null) return;
+  window.cancelAnimationFrame(memoryHighlightFrame);
+  memoryHighlightFrame = null;
+}
+
+function setupMemoryRollInteractions() {
+  if (!memoryRoll || memoryRoll.dataset.interactionsReady === "true") return;
+
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const pause = () => memoryRoll.classList.add("is-paused");
+    const play = () => memoryRoll.classList.remove("is-paused");
+
+    memoryRoll.addEventListener("mouseenter", pause);
+    memoryRoll.addEventListener("mouseleave", play);
+  }
+
+  memoryRoll.dataset.interactionsReady = "true";
+}
+
 function paintDots() {
   dots.forEach((dot, index) => {
     dot.classList.toggle("is-filled", index < enteredCode.length);
@@ -360,5 +432,18 @@ window.addEventListener("pointermove", (event) => {
 
 window.addEventListener("pointerdown", startMusic, { once: true });
 window.addEventListener("keydown", startMusic, { once: true });
+window.addEventListener("resize", highlightMemoryRollCenter, { passive: true });
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    stopMemoryHighlightLoop();
+    return;
+  }
 
+  startMemoryHighlightLoop();
+});
+
+setupMemoryReelLoop();
+setupMemoryRollInteractions();
+highlightMemoryRollCenter();
+startMemoryHighlightLoop();
 paintDots();

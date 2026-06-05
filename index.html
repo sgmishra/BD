@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Birthday Story</title>
+    <title>Birthday Story V2</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,10 +17,10 @@
       id="bgMusic"
       loop
       preload="auto"
-      data-default-src="assets/placeholder-music.mp3"
-      data-finale-src="assets/placeholder-finale-music.mp3"
+      data-default-src="assets/romantic-theme.ogg"
+      data-finale-src="assets/romantic-theme.ogg"
     >
-      <source src="assets/placeholder-music.mp3" type="audio/mpeg" />
+      <source src="assets/romantic-theme.ogg" type="audio/ogg" />
     </audio>
 
     <div class="scene">
@@ -38,6 +38,14 @@
         <span class="particle p6"></span>
         <span class="particle p7"></span>
         <span class="particle p8"></span>
+        <span class="particle p9"></span>
+        <span class="particle p10"></span>
+        <span class="particle p11"></span>
+        <span class="particle p12"></span>
+        <span class="particle p13"></span>
+        <span class="particle p14"></span>
+        <span class="particle p15"></span>
+        <span class="particle p16"></span>
       </div>
     </div>
 
@@ -47,7 +55,7 @@
           <div class="screen-panel glass-panel parallax-card" data-parallax="12">
             <div class="row align-items-center g-4 g-xl-5">
               <div class="col-lg-6">
-                <span class="eyebrow">Birthday Story</span>
+                <span class="eyebrow">Birthday Story V2</span>
                 <h1 class="display-title reveal-block">A more cinematic version of the surprise.</h1>
                 <p class="hero-copy reveal-block">
                   This version layers in the strongest upgrades: modal reveals, masked
@@ -90,10 +98,7 @@
             <div class="row g-4 align-items-center">
               <div class="col-lg-5">
                 <div class="gif-card invite-gif-stage">
-                  <div class="media-placeholder media-placeholder-gif" aria-label="GIF placeholder">
-                    <span>GIF Placeholder</span>
-                    <small>Add your invite GIF here later</small>
-                  </div>
+                  <img class="invite-gif-image" src="assets/invite-gif.gif" alt="Ace Ventura GIF" loading="lazy" />
                 </div>
               </div>
               <div class="col-lg-7">
@@ -123,9 +128,8 @@
               <div class="col-lg-6">
                 <div class="polaroid-stack parallax-card" data-parallax="-10">
                   <div class="polaroid polaroid-main">
-                    <div class="polaroid-art media-placeholder">
-                      <span>Image Placeholder</span>
-                      <small>Add a photo here later</small>
+                    <div class="polaroid-art media-photo-frame">
+                      <img class="sample-photo" src="assets/temp-unlock.jpg" alt="Sample birthday photo" loading="lazy" />
                     </div>
                     <p>For her day</p>
                   </div>
@@ -174,9 +178,8 @@
               <div class="col-lg-5">
                 <div class="portrait-reveal parallax-card" data-parallax="10">
                   <div class="portrait-glow"></div>
-                  <div class="portrait-panel masked-photo media-placeholder media-placeholder-image">
-                    <span>Image Placeholder</span>
-                    <small>Add a photo here later</small>
+                  <div class="portrait-panel masked-photo media-photo-frame">
+                    <img class="sample-photo portrait-photo" src="assets/temp-letter.jpg" alt="Sample portrait memory" loading="lazy" />
                   </div>
                 </div>
               </div>
@@ -210,64 +213,21 @@
               <span class="eyebrow justify-content-center">Chapter 5</span>
               <h2 class="section-title reveal-block">Memory moments</h2>
             </div>
-            <div id="memoryCarousel" class="carousel slide memory-carousel" data-bs-interval="false">
-              <div class="carousel-indicators custom-indicators">
-                <button type="button" data-bs-target="#memoryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#memoryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#memoryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-              </div>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div class="carousel-card memory-one masked-card">
-                    <div>
-                      <span class="mini-badge">Memory 01</span>
-                      <p class="placeholder-kicker">Image Placeholder</p>
-                      <h3>The first long conversation</h3>
-                      <p>The one that started simple and quietly became the part of the day I waited for.</p>
-                    </div>
-                    <div class="memory-photo media-placeholder">
-                      <span>Image Placeholder</span>
-                      <small>Add a memory photo here later</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="carousel-card memory-two masked-card">
-                    <div>
-                      <span class="mini-badge">Memory 02</span>
-                      <p class="placeholder-kicker">Image Placeholder</p>
-                      <h3>The sweetest check-ins</h3>
-                      <p>The tiny moments that somehow made everything feel calmer, softer, and warmer.</p>
-                    </div>
-                    <div class="memory-photo media-placeholder">
-                      <span>Image Placeholder</span>
-                      <small>Add a memory photo here later</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="carousel-card memory-three masked-card">
-                    <div>
-                      <span class="mini-badge">Memory 03</span>
-                      <p class="placeholder-kicker">Image Placeholder</p>
-                      <h3>The smile I keep replaying</h3>
-                      <p>The expression that turned into a whole feeling I still carry around.</p>
-                    </div>
-                    <div class="memory-photo media-placeholder">
-                      <span>Image Placeholder</span>
-                      <small>Add a memory photo here later</small>
-                    </div>
-                  </div>
+            <div class="memory-roll-shell js-memory-roll-shell">
+              <div class="memory-roll js-memory-roll" aria-label="10 rolling memory images">
+                <div class="memory-roll-track js-memory-reel-track">
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-1.jpg" alt="Memory 01" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-2.jpg" alt="Memory 02" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-3.jpg" alt="Memory 03" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-4.jpg" alt="Memory 04" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-5.jpg" alt="Memory 05" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-6.jpg" alt="Memory 06" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-7.jpg" alt="Memory 07" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-8.jpg" alt="Memory 08" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-9.jpg" alt="Memory 09" loading="lazy" /></div></div>
+                  <div class="memory-roll-slot"><div class="memory-roll-card"><img src="assets/memory-10.jpg" alt="Memory 10" loading="lazy" /></div></div>
                 </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#memoryCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#memoryCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
             <div class="d-flex justify-content-center mt-4">
               <button class="btn btn-gold btn-sheen" type="button" data-next="finale">Final chapter</button>
