@@ -6,15 +6,18 @@ const dots = Array.from(document.querySelectorAll(".passcode-dots span"));
 const keys = Array.from(document.querySelectorAll(".key"));
 const nextButtons = Array.from(document.querySelectorAll("[data-next]"));
 const errorMessage = document.querySelector(".error-message");
+const unlockPanel = document.querySelector(".unlock-panel");
 const giftButton = document.querySelector("#giftButton");
 const giftBox = document.querySelector("#giftBox");
 const cakeStage = document.querySelector("#cakeStage");
 const cakeButton = document.querySelector("#cakeButton");
+const finaleFireworksNode = document.querySelector("#finaleFireworks");
 const restartButton = document.querySelector("#restartButton");
 const noButton = document.querySelector("#noButton");
 const pleaseButton = document.querySelector("#pleaseButton");
 const cryingOverlay = document.querySelector("#cryingOverlay");
 const bgMusic = document.querySelector("#bgMusic");
+const musicSource = bgMusic?.querySelector("source") ?? null;
 const carouselNode = document.querySelector("#memoryCarousel");
 const orbNodes = Array.from(document.querySelectorAll("[data-parallax]"));
 
@@ -23,12 +26,48 @@ const memoryCarousel = carouselNode ? bootstrap.Carousel.getOrCreateInstance(car
 let activeScreen = "welcome";
 let enteredCode = "";
 let isTransitioning = false;
+let currentTrack = bgMusic?.dataset.defaultSrc || musicSource?.getAttribute("src") || "";
+let finaleFireworks = null;
 
 function getScreen(name) {
   return document.querySelector(`[data-screen="${name}"]`);
 }
 
 function burstConfetti(x, y, count = 18) {
+  if (typeof window.confetti === "function") {
+    const originX = x / window.innerWidth;
+    const originY = y / window.innerHeight;
+    const particleCount = Math.max(18, Math.min(40, count));
+
+    window.confetti({
+      particleCount,
+      spread: 72,
+      startVelocity: 24,
+      gravity: 1.02,
+      decay: 0.95,
+      scalar: 0.82,
+      ticks: 180,
+      disableForReducedMotion: true,
+      origin: { x: originX, y: originY },
+      colors: ["#ffd37a", "#ffe8b4", "#ffd9e5", "#fff6f4", "#ffc8a2"],
+    });
+
+    window.confetti({
+      particleCount: Math.max(10, Math.round(particleCount * 0.45)),
+      spread: 42,
+      startVelocity: 18,
+      gravity: 1.08,
+      decay: 0.96,
+      scalar: 0.64,
+      ticks: 140,
+      disableForReducedMotion: true,
+      origin: { x: originX, y: Math.min(0.96, originY + 0.02) },
+      colors: ["#ffe8b4", "#fff6f4", "#ffd9e5"],
+    });
+
+    return;
+  }
+
   for (let index = 0; index < count; index += 1) {
     const bit = document.createElement("span");
     bit.className = "confetti-bit";
@@ -49,6 +88,127 @@ function startMusic() {
   bgMusic.play().catch(() => {});
 }
 
+function switchMusicTrack(nextTrack) {
+  if (!bgMusic || !nextTrack || currentTrack === nextTrack) return;
+
+  currentTrack = nextTrack;
+
+  if (musicSource) {
+    musicSource.setAttribute("src", nextTrack);
+    bgMusic.load();
+  } else {
+    bgMusic.src = nextTrack;
+  }
+
+  bgMusic.volume = 0.6;
+  bgMusic.play().catch(() => {});
+}
+
+function ensureFinaleFireworks() {
+  const FireworksCtor = window.Fireworks?.default || window.Fireworks;
+
+  if (finaleFireworks || !finaleFireworksNode || !FireworksCtor) {
+    return finaleFireworks;
+  }
+
+  finaleFireworks = new FireworksCtor(finaleFireworksNode, {
+    autoresize: true,
+    opacity: 0.96,
+    acceleration: 1.02,
+    friction: 0.965,
+    gravity: 1.22,
+    particles: 132,
+    traceLength: 5,
+    traceSpeed: 14,
+    explosion: 16,
+    intensity: 42,
+    flickering: 68,
+    lineStyle: "round",
+    hue: {
+      min: 12,
+      max: 52,
+    },
+    delay: {
+      min: 18,
+      max: 34,
+    },
+    rocketsPoint: {
+      min: 8,
+      max: 92,
+    },
+    brightness: {
+      min: 60,
+      max: 92,
+    },
+    decay: {
+      min: 0.01,
+      max: 0.02,
+    },
+    mouse: {
+      click: false,
+      move: false,
+      max: 1,
+    },
+    sound: {
+      enabled: false,
+    },
+  });
+
+  return finaleFireworks;
+}
+
+function stopFinaleFireworks() {
+  finaleFireworks?.stop();
+}
+
+function runCakeConfetti() {
+  if (typeof window.confetti !== "function" || !cakeButton) return;
+
+  const rect = cakeButton.getBoundingClientRect();
+  const centerX = (rect.left + rect.width / 2) / window.innerWidth;
+  const centerY = (rect.top + rect.height * 0.45) / window.innerHeight;
+  const defaults = {
+    ticks: 260,
+    gravity: 0.92,
+    decay: 0.94,
+    startVelocity: 42,
+    scalar: 1.02,
+    disableForReducedMotion: true,
+    colors: ["#ffd37a", "#ffe8b4", "#ffd9e5", "#fff6f4", "#ffc8a2"],
+  };
+
+  window.confetti({
+    ...defaults,
+    particleCount: 90,
+    spread: 120,
+    origin: { x: centerX, y: centerY },
+  });
+
+  window.confetti({
+    ...defaults,
+    particleCount: 56,
+    angle: 62,
+    spread: 72,
+    origin: { x: Math.max(0.08, centerX - 0.16), y: Math.min(0.92, centerY + 0.04) },
+  });
+
+  window.confetti({
+    ...defaults,
+    particleCount: 56,
+    angle: 118,
+    spread: 72,
+    origin: { x: Math.min(0.92, centerX + 0.16), y: Math.min(0.92, centerY + 0.04) },
+  });
+}
+
+function launchCakeFinale() {
+  const fireworks = ensureFinaleFireworks();
+
+  fireworks?.start();
+  fireworks?.launch(10);
+  runCakeConfetti();
+}
+
 function paintDots() {
   dots.forEach((dot, index) => {
     dot.classList.toggle("is-filled", index < enteredCode.length);
@@ -58,6 +218,7 @@ function paintDots() {
 function clearCode(message = "") {
   enteredCode = "";
   errorMessage.textContent = message;
+  unlockPanel?.classList.remove("is-error", "is-success");
   paintDots();
 }
 
@@ -83,6 +244,8 @@ function switchScreen(nextName) {
 
 function unlockStory() {
   errorMessage.textContent = "Unlocked.";
+  unlockPanel?.classList.remove("is-error");
+  unlockPanel?.classList.add("is-success");
   burstConfetti(window.innerWidth * 0.5, window.innerHeight * 0.45, 24);
   window.setTimeout(() => switchScreen("message"), 260);
 }
@@ -100,6 +263,8 @@ function handleDigit(value) {
       return;
     }
 
+    unlockPanel?.classList.remove("is-success");
+    unlockPanel?.classList.add("is-error");
     window.setTimeout(() => clearCode("Wrong passcode. Try the birthday date."), 240);
   }
 }
@@ -143,8 +308,11 @@ cakeButton?.addEventListener("click", () => {
     return;
   }
 
+  switchMusicTrack(bgMusic?.dataset.finaleSrc || "");
+  cakeStage.classList.remove("is-celebrating");
+  void cakeStage.offsetWidth;
   cakeStage.classList.add("is-celebrating");
-  burstConfetti(window.innerWidth * 0.5, window.innerHeight * 0.42, 28);
+  launchCakeFinale();
 });
 
 noButton?.addEventListener("click", () => {
@@ -171,8 +339,10 @@ restartButton?.addEventListener("click", () => {
   enteredCode = "";
   giftBox.classList.remove("is-visible");
   cakeStage.classList.remove("is-celebrating");
+  stopFinaleFireworks();
   clearCode();
   memoryCarousel?.to(0);
+  switchMusicTrack(bgMusic?.dataset.defaultSrc || "");
 });
 
 window.addEventListener("pointermove", (event) => {

@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="styles-v2.css" />
   </head>
   <body>
-    <audio id="bgMusic" loop preload="auto">
+    <audio
+      id="bgMusic"
+      loop
+      preload="auto"
+      data-default-src="assets/placeholder-music.mp3"
+      data-finale-src="assets/placeholder-finale-music.mp3"
+    >
       <source src="assets/placeholder-music.mp3" type="audio/mpeg" />
     </audio>
 
@@ -44,7 +50,7 @@
                 <span class="eyebrow">Birthday Story V2</span>
                 <h1 class="display-title reveal-block">A more cinematic version of the surprise.</h1>
                 <p class="hero-copy reveal-block">
-                  This version layers in the strongest upgrades: modal reveals, toasts, masked
+                  This version layers in the strongest upgrades: modal reveals, masked
                   transitions, spotlight glow, placeholders for your own media, and a more
                   premium visual mood.
                 </p>
@@ -83,7 +89,7 @@
           <div class="screen-panel glass-panel">
             <div class="row g-4 align-items-center">
               <div class="col-lg-5">
-                <div class="gif-card">
+                <div class="gif-card invite-gif-stage">
                   <div class="media-placeholder media-placeholder-gif" aria-label="GIF placeholder">
                     <span>GIF Placeholder</span>
                     <small>Add your invite GIF here later</small>
@@ -100,7 +106,7 @@
                   <button class="btn btn-gold btn-lg btn-sheen" type="button" data-next="unlock">
                     Yes
                   </button>
-                  <button class="btn btn-ghost btn-lg" type="button" id="noButtonV2">
+                  <button class="btn btn-ghost btn-lg" type="button" id="noButton">
                     No
                   </button>
                 </div>
@@ -112,7 +118,7 @@
 
       <section class="screen" data-screen="unlock" data-title="Unlock" data-step="3">
         <div class="container">
-          <div class="screen-panel glass-panel screen-curtain">
+          <div class="screen-panel glass-panel screen-curtain unlock-panel">
             <div class="row g-4 align-items-center">
               <div class="col-lg-6">
                 <div class="polaroid-stack parallax-card" data-parallax="-10">
@@ -177,11 +183,11 @@
               <div class="col-lg-7">
                 <span class="eyebrow">Chapter 4</span>
                 <h2 class="section-title reveal-block">A soft little letter for her</h2>
-                <p class="section-copy reveal-block">
+                <p class="section-copy reveal-block letter-line letter-line-a">
                   This chapter introduces the story more gently, with staged text reveal and a
                   button that opens a full Bootstrap modal for the hidden version of the note.
                 </p>
-                <p class="section-copy reveal-block">
+                <p class="section-copy reveal-block letter-line letter-line-b">
                   Keep the on-page text short, then use the modal for something more intimate and
                   personal when you customize it.
                 </p>
@@ -204,11 +210,11 @@
               <span class="eyebrow justify-content-center">Chapter 5</span>
               <h2 class="section-title reveal-block">Memory moments</h2>
             </div>
-            <div id="memoryCarouselV2" class="carousel slide memory-carousel" data-bs-interval="false">
+            <div id="memoryCarousel" class="carousel slide memory-carousel" data-bs-interval="false">
               <div class="carousel-indicators custom-indicators">
-                <button type="button" data-bs-target="#memoryCarouselV2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#memoryCarouselV2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#memoryCarouselV2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#memoryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#memoryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#memoryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
               </div>
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -219,6 +225,10 @@
                       <h3>The first long conversation</h3>
                       <p>The one that started simple and quietly became the part of the day I waited for.</p>
                     </div>
+                    <div class="memory-photo media-placeholder">
+                      <span>Image Placeholder</span>
+                      <small>Add a memory photo here later</small>
+                    </div>
                   </div>
                 </div>
                 <div class="carousel-item">
@@ -226,8 +236,12 @@
                     <div>
                       <span class="mini-badge">Memory 02</span>
                       <p class="placeholder-kicker">Image Placeholder</p>
-                      <h3>The warmth in your laugh</h3>
-                      <p>The kind that lingers after the moment ends and still changes the air around it.</p>
+                      <h3>The sweetest check-ins</h3>
+                      <p>The tiny moments that somehow made everything feel calmer, softer, and warmer.</p>
+                    </div>
+                    <div class="memory-photo media-placeholder">
+                      <span>Image Placeholder</span>
+                      <small>Add a memory photo here later</small>
                     </div>
                   </div>
                 </div>
@@ -236,24 +250,27 @@
                     <div>
                       <span class="mini-badge">Memory 03</span>
                       <p class="placeholder-kicker">Image Placeholder</p>
-                      <h3>The calm of your presence</h3>
-                      <p>Even stillness feels beautiful when you are part of it.</p>
+                      <h3>The smile I keep replaying</h3>
+                      <p>The expression that turned into a whole feeling I still carry around.</p>
+                    </div>
+                    <div class="memory-photo media-placeholder">
+                      <span>Image Placeholder</span>
+                      <small>Add a memory photo here later</small>
                     </div>
                   </div>
                 </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#memoryCarouselV2" data-bs-slide="prev">
+              <button class="carousel-control-prev" type="button" data-bs-target="#memoryCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#memoryCarouselV2" data-bs-slide="next">
+              <button class="carousel-control-next" type="button" data-bs-target="#memoryCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
-
-            <div class="text-center mt-4">
-              <button class="btn btn-gold btn-sheen" type="button" data-next="finale">Go to finale</button>
+            <div class="d-flex justify-content-center mt-4">
+              <button class="btn btn-gold btn-sheen" type="button" data-next="finale">Final chapter</button>
             </div>
           </div>
         </div>
@@ -261,61 +278,77 @@
 
       <section class="screen" data-screen="finale" data-title="Finale" data-step="6">
         <div class="container">
-          <div class="screen-panel glass-panel finale-panel">
-            <div class="text-center">
-              <span class="eyebrow justify-content-center">Chapter 6</span>
-              <h2 class="section-title reveal-block">Make a wish</h2>
-              <p class="section-copy narrow-copy mx-auto reveal-block">
-                Open the gift first, then tap the cake for the final celebration. This keeps the
-                last chapter interactive without needing another extra page.
+          <div class="screen-panel glass-panel finale-screen">
+            <div class="finale-blobs" aria-hidden="true">
+              <span class="finale-blob finale-blob-a"></span>
+              <span class="finale-blob finale-blob-b"></span>
+              <span class="finale-blob finale-blob-c"></span>
+            </div>
+            <div class="text-center section-heading">
+              <span class="eyebrow justify-content-center">Final chapter</span>
+              <h2 class="section-title reveal-block">One last surprise</h2>
+              <p class="section-copy reveal-block">
+                A tiny ending scene for the birthday girl, with one button to open the gift and one
+                cake interaction to celebrate after it appears.
               </p>
             </div>
             <div class="gift-stage mt-3 text-center">
-              <button class="btn btn-gold btn-lg btn-sheen" type="button" id="giftButtonV2">Open the gift</button>
-              <div class="gift-box" id="giftBoxV2">
+              <button class="btn btn-gold btn-lg btn-sheen" type="button" id="giftButton">Open the gift</button>
+              <div class="gift-box" id="giftBox">
                 <h3>Surprise unlocked</h3>
                 <p>This can become a real plan, a note, a hidden photo, or a reveal for an actual present.</p>
               </div>
             </div>
-            <div class="cake-stage mx-auto" id="cakeStageV2">
-              <div class="fireworks" aria-hidden="true">
-                <span class="burst burst-a"></span>
-                <span class="burst burst-b"></span>
-                <span class="burst burst-c"></span>
-                <span class="burst burst-d"></span>
-              </div>
-              <button class="cake" type="button" id="cakeButtonV2" aria-label="Birthday cake">
+            <div class="cake-stage mx-auto" id="cakeStage">
+              <div class="fireworks-canvas" id="finaleFireworks" aria-hidden="true"></div>
+              <button class="cake" type="button" id="cakeButton" aria-label="Birthday cake">
+                <span class="cake-glow" aria-hidden="true"></span>
                 <span class="cake-top"></span>
                 <span class="cake-bottom"></span>
-                <span class="candle candle-1"><span class="flame"></span></span>
-                <span class="candle candle-2"><span class="flame"></span></span>
-                <span class="candle candle-3"><span class="flame"></span></span>
+                <span class="candle candle-1">
+                  <span class="flame"></span>
+                  <span class="smoke smoke-1"></span>
+                </span>
+                <span class="candle candle-2">
+                  <span class="flame"></span>
+                  <span class="smoke smoke-2"></span>
+                </span>
+                <span class="candle candle-3">
+                  <span class="flame"></span>
+                  <span class="smoke smoke-3"></span>
+                </span>
               </button>
             </div>
             <p class="wish-message text-center mt-3">Happy Birthday to the softest, brightest part of my world.</p>
             <div class="d-flex justify-content-center gap-3 mt-4">
-              <button class="btn btn-ghost" type="button" id="restartButtonV2">Replay from chapter one</button>
+              <button class="btn btn-ghost" type="button" id="restartButton">Replay from chapter one</button>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <div class="modal fade letter-modal" id="secretLetterModal" tabindex="-1" aria-labelledby="secretLetterModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="secretLetterModal"
+      tabindex="-1"
+      aria-labelledby="secretLetterLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
+        <div class="modal-content glass-panel modal-letter">
           <div class="modal-header border-0">
-            <h2 class="modal-title" id="secretLetterModalLabel">The hidden letter</h2>
+            <h5 class="modal-title" id="secretLetterLabel">The longer version</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <p>
-              This modal is for the more personal version of the message. Keep the main pages elegant and
-              restrained, then let this feel like the private heart of the project.
+              Replace this with the full birthday note later. This spot is ideal for the personal
+              message you do not want to place directly on the screen.
             </p>
             <p>
-              Replace this with her name, your own memories, specific promises, and the kind of writing
-              that only makes sense between the two of you.
+              Keep it more intimate here: the things you admire, the memories you want to hold on
+              to, and what you hope this next year gives her.
             </p>
           </div>
         </div>
@@ -326,8 +359,8 @@
       <div class="crying-card text-center" role="dialog" aria-modal="true" aria-labelledby="cryingModalLabel">
         <img class="crying-gif-image" src="assets/crying-bye.gif" alt="Crying GIF" />
         <h2 class="modal-title mt-3" id="cryingModalLabel">No?</h2>
-        <p>nahi n Shoni aaisa nahi karo n , Please</p>
-        <button type="button" class="btn btn-gold btn-sheen mt-2" id="pleaseButtonV2">
+        <p>nahi n Shoni aaisa nahi karo jaan</p>
+        <button type="button" class="btn btn-gold btn-sheen mt-2" id="pleaseButton">
           Please
         </button>
       </div>
@@ -338,6 +371,8 @@
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
     <script src="script-v2.js"></script>
   </body>
 </html>
