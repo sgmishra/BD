@@ -44,7 +44,7 @@ window.BD_CONTENT = {
     '.screen[data-screen="vault"] .eyebrow': "Secret vault",
     '.screen[data-screen="vault"] .section-title': "A few little gifts are waiting for you.",
     '.screen[data-screen="vault"] .section-copy': "Each surprise unlocks one at a time. Every passkey reveals a new gift and adds it quietly to your history.",
-    ".vault-history-head .mini-badge": "Order history",
+    ".vault-history-head .mini-badge": "Gifts",
     ".vault-history-head h3": "Unlocked gifts",
     ".vault-history-head p": "Every revealed surprise gets saved here with its image and tiny note.",
     "#vaultBeginButton": "Unlock this gift",
@@ -75,7 +75,7 @@ window.BD_CONTENT = {
     emptyHistory: "Nothing has been unlocked yet.",
     completeBadge: "Complete",
     completeTitle: "Every hidden gift is unlocked.",
-    completeCopy: "The full little order history is waiting on the right now.",
+    completeCopy: "The full little gift list is waiting on the right now.",
     unlockedBadge: "Gift unlocked",
   },
 };

@@ -58,43 +58,61 @@ const vaultGifts = [
     title: "Moonlit Memory",
     copy: "A soft little moment saved for later, warm enough to revisit any night.",
     history: "Unlocked first and tucked gently into the story.",
-    image: "assets/v2-gift-1.jpg",
+    image: "gifts/1.png",
   },
   {
     title: "Golden Glow",
     copy: "A brighter surprise with that same quiet sweetness you carry everywhere.",
     history: "Added with a warm glow and a tiny smile.",
-    image: "assets/v2-gift-2.jpg",
+    image: "gifts/2.png",
   },
   {
     title: "Sweet Check-In",
     copy: "The kind of gift that feels like a message arriving exactly when it should.",
     history: "Saved as one more soft piece of the night.",
-    image: "assets/v2-gift-3.jpg",
+    image: "gifts/3.png",
   },
   {
     title: "Little Spark",
     copy: "A tiny celebration wrapped up in color, warmth, and a bit of magic.",
     history: "Dropped into history like a spark that stayed.",
-    image: "assets/v2-gift-4.jpg",
+    image: "gifts/4.png",
   },
   {
     title: "Rosy Surprise",
     copy: "A prettier, softer reveal for the part of the story that lingers longest.",
     history: "Now resting in your unlocked list on the right.",
-    image: "assets/v2-gift-5.jpg",
+    image: "gifts/5.png",
   },
   {
     title: "Hidden Treasure",
     copy: "Another secret opened, another memory-shaped gift brought into the light.",
     history: "Unlocked quietly and added to your growing collection.",
-    image: "assets/v2-gift-6.jpg",
+    image: "gifts/6.png",
   },
   {
     title: "Last Little Wonder",
     copy: "The final surprise in the vault, still soft, still glowing, still yours.",
     history: "The last gift settled into place to complete the story.",
-    image: "assets/v2-gift-7.jpg",
+    image: "gifts/7.png",
+  },
+  {
+    title: "Future Little Surprise",
+    copy: "A placeholder for the next gift you will drop in later.",
+    history: "Reserved and waiting for its real image.",
+    image: "assets/gift-placeholder.svg",
+  },
+  {
+    title: "Another Soft Secret",
+    copy: "One more spot saved for a future surprise you want to add.",
+    history: "Still wrapped and ready for customization.",
+    image: "assets/gift-placeholder.svg",
+  },
+  {
+    title: "Final Hidden Spot",
+    copy: "The last placeholder slot, ready whenever you are.",
+    history: "Kept open for one more special reveal.",
+    image: "assets/gift-placeholder.svg",
   },
 ];
 
@@ -443,7 +461,7 @@ function syncVaultIdleState() {
     }
     vaultStatusBadge.textContent = CONTENT.vault?.completeBadge || "Complete";
     vaultRevealTitle.textContent = CONTENT.vault?.completeTitle || "Every hidden gift is unlocked.";
-    vaultRevealCopy.textContent = CONTENT.vault?.completeCopy || "The full little order history is waiting on the right now.";
+    vaultRevealCopy.textContent = CONTENT.vault?.completeCopy || "The full little gift list is waiting on the right now.";
     vaultBeginButton.hidden = true;
     vaultNextButton.hidden = true;
     return;
