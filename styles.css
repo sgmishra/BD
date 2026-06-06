@@ -724,19 +724,24 @@ button {
   overflow: visible;
 }
 
+.memory-screen-panel .section-heading {
+  margin-bottom: 1.1rem;
+  padding-right: clamp(108px, 14vw, 150px);
+}
+
 .memory-roll-shell::before,
 .memory-roll-shell::after {
   display: none;
 }
 
 .memory-roll {
-  --memory-card-size: 180px;
-  --memory-gap: 18px;
-  --memory-slot-size: 300px;
+  --memory-card-size: 360px;
+  --memory-gap: 24px;
+  --memory-slot-size: 332px;
   overflow-x: hidden;
   overflow-y: visible;
   border-radius: 0;
-  padding: 76px 0;
+  padding: 18px 0 22px;
 }
 
 .memory-roll-track {
@@ -752,7 +757,7 @@ button {
 
 .memory-roll-slot {
   width: var(--memory-slot-size);
-  min-height: calc(var(--memory-card-size) * 1.9);
+  min-height: calc(var(--memory-card-size) * 2.24);
   display: grid;
   place-items: center;
 }
@@ -764,12 +769,12 @@ button {
 .memory-roll-card {
   position: relative;
   width: var(--memory-card-size);
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 9 / 16;
   border-radius: 28px;
   overflow: hidden;
   display: grid;
   place-items: center;
-  transform: translate3d(0, var(--card-shift, 20px), 0) scale(var(--card-scale, 0.72));
+  transform: translate3d(0, var(--card-shift, 10px), 0) scale(var(--card-scale, 0.86));
   opacity: var(--card-opacity, 0.2);
   z-index: var(--card-z, 1);
   background:
@@ -783,8 +788,21 @@ button {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.1),
     0 18px 40px rgba(16, 4, 10, 0.18);
-  transition: transform 180ms linear, opacity 220ms linear, box-shadow 220ms linear;
+  transition: transform 110ms linear, opacity 140ms linear, box-shadow 140ms linear;
   will-change: transform, opacity;
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+.memory-next-wrap {
+  position: absolute;
+  top: clamp(18px, 2.2vw, 30px);
+  right: clamp(18px, 2.2vw, 30px);
+  z-index: 4;
+}
+
+.memory-next-button {
+  min-width: 96px;
 }
 
 .memory-roll-card img {
@@ -1595,10 +1613,10 @@ body:has(.crying-overlay.is-visible) .experience-shell {
   }
 
   .memory-roll {
-    --memory-card-size: 170px;
-    --memory-gap: 14px;
-    --memory-slot-size: 250px;
-    padding: 96px 0;
+    --memory-card-size: 280px;
+    --memory-gap: 18px;
+    --memory-slot-size: 254px;
+    padding: 14px 0 16px;
   }
 
   .memory-roll-track {
@@ -1608,6 +1626,15 @@ body:has(.crying-overlay.is-visible) .experience-shell {
   .memory-roll-shell::before,
   .memory-roll-shell::after {
     width: 56px;
+  }
+
+  .memory-next-wrap {
+    top: 18px;
+    right: 18px;
+  }
+
+  .memory-screen-panel .section-heading {
+    padding-right: 96px;
   }
 }
 
@@ -1672,10 +1699,18 @@ body:has(.crying-overlay.is-visible) .experience-shell {
   }
 
   .memory-roll {
-    --memory-card-size: 140px;
-    --memory-gap: 12px;
-    --memory-slot-size: 210px;
-    padding: 74px 0;
+    --memory-card-size: 228px;
+    --memory-gap: 14px;
+    --memory-slot-size: 206px;
+    padding: 12px 0 14px;
+  }
+
+  .memory-screen-panel .section-heading {
+    padding-right: 82px;
+  }
+
+  .memory-next-button {
+    width: auto;
   }
 
   .passcode-dots {

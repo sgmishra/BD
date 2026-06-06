@@ -50,6 +50,8 @@ let isTransitioning = false;
 let currentTrack = bgMusic?.dataset.defaultSrc || musicSource?.getAttribute("src") || "";
 let finaleFireworks = null;
 let memoryHighlightFrame = null;
+let memoryHighlightLastAt = 0;
+let memoryRollItems = [];
 let vaultCode = "";
 let currentGiftIndex = 0;
 
@@ -58,43 +60,43 @@ const vaultGifts = [
     title: "Moonlit Memory",
     copy: "A soft little moment saved for later, warm enough to revisit any night.",
     history: "Unlocked first and tucked gently into the story.",
-    image: "gifts/1.png",
+    image: "assets/gifts/1.png",
   },
   {
     title: "Golden Glow",
     copy: "A brighter surprise with that same quiet sweetness you carry everywhere.",
     history: "Added with a warm glow and a tiny smile.",
-    image: "gifts/2.png",
+    image: "assets/gifts/2.png",
   },
   {
     title: "Sweet Check-In",
     copy: "The kind of gift that feels like a message arriving exactly when it should.",
     history: "Saved as one more soft piece of the night.",
-    image: "gifts/3.png",
+    image: "assets/gifts/3.png",
   },
   {
     title: "Little Spark",
     copy: "A tiny celebration wrapped up in color, warmth, and a bit of magic.",
     history: "Dropped into history like a spark that stayed.",
-    image: "gifts/4.png",
+    image: "assets/gifts/4.png",
   },
   {
     title: "Rosy Surprise",
     copy: "A prettier, softer reveal for the part of the story that lingers longest.",
     history: "Now resting in your unlocked list on the right.",
-    image: "gifts/5.png",
+    image: "assets/gifts/5.png",
   },
   {
     title: "Hidden Treasure",
     copy: "Another secret opened, another memory-shaped gift brought into the light.",
     history: "Unlocked quietly and added to your growing collection.",
-    image: "gifts/6.png",
+    image: "assets/gifts/6.png",
   },
   {
     title: "Last Little Wonder",
     copy: "The final surprise in the vault, still soft, still glowing, still yours.",
     history: "The last gift settled into place to complete the story.",
-    image: "gifts/7.png",
+    image: "assets/gifts/7.png",
   },
   {
     title: "Future Little Surprise",
@@ -321,30 +323,30 @@ function setupMemoryReelLoop() {
   if (!memoryReelTrack || memoryReelTrack.dataset.loopReady === "true") return;
 
   memoryReelTrack.insertAdjacentHTML("beforeend", memoryReelTrack.innerHTML);
+  memoryRollItems = Array.from(memoryRoll?.querySelectorAll(".memory-roll-slot") || [])
+    .map((slot) => ({ slot, card: slot.querySelector(".memory-roll-card") }))
+    .filter((item) => item.card);
   memoryReelTrack.dataset.loopReady = "true";
 }
 
 function highlightMemoryRollCenter() {
-  if (!memoryRoll) return;
+  if (!memoryRoll || !memoryRollItems.length) return;
 
-  const slots = Array.from(memoryRoll.querySelectorAll(".memory-roll-slot"));
   const rollRect = memoryRoll.getBoundingClientRect();
+  const trackRect = memoryReelTrack?.getBoundingClientRect();
   const centerX = rollRect.left + (rollRect.width / 2);
-  const maxDistance = rollRect.width / 2;
+  const maxDistance = Math.max(rollRect.width / 2, 1);
+  const trackLeft = trackRect?.left ?? rollRect.left;
 
-  slots.forEach((slot) => {
-    const card = slot.querySelector(".memory-roll-card");
-    if (!card) return;
-
-    const rect = slot.getBoundingClientRect();
-    const slotCenter = rect.left + (rect.width / 2);
+  memoryRollItems.forEach(({ slot, card }) => {
+    const slotCenter = trackLeft + slot.offsetLeft + (slot.offsetWidth / 2);
     const distance = Math.abs(slotCenter - centerX);
     const normalizedDistance = Math.min(distance / maxDistance, 1);
     const emphasis = 1 - normalizedDistance;
     const easedEmphasis = emphasis * emphasis * (3 - (2 * emphasis));
-    const scale = 0.72 + (easedEmphasis * 1.28);
-    const opacity = 0.14 + (easedEmphasis * 0.86);
-    const shift = 18 - (easedEmphasis * 18);
+    const scale = 0.52 + (easedEmphasis * 0.62);
+    const opacity = 0.12 + (easedEmphasis * 0.88);
+    const shift = 14 - (easedEmphasis * 14);
     const zIndex = 1 + Math.round(easedEmphasis * 20);
 
     card.style.setProperty("--card-scale", scale.toFixed(3));
@@ -357,18 +359,23 @@ function highlightMemoryRollCenter() {
 function startMemoryHighlightLoop() {
   if (!memoryRoll || memoryHighlightFrame !== null) return;
 
-  const tick = () => {
-    highlightMemoryRollCenter();
+  const tick = (now) => {
+    if ((now - memoryHighlightLastAt) >= 32) {
+      highlightMemoryRollCenter();
+      memoryHighlightLastAt = now;
+    }
     memoryHighlightFrame = window.requestAnimationFrame(tick);
   };
 
-  tick();
+  memoryHighlightLastAt = 0;
+  memoryHighlightFrame = window.requestAnimationFrame(tick);
 }
 
 function stopMemoryHighlightLoop() {
   if (memoryHighlightFrame === null) return;
   window.cancelAnimationFrame(memoryHighlightFrame);
   memoryHighlightFrame = null;
+  memoryHighlightLastAt = 0;
 }
 
 function setupMemoryRollInteractions() {
