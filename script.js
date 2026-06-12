@@ -98,24 +98,6 @@ const vaultGifts = [
     history: "Added to Gifts",
     image: "assets/gifts/7.png",
   },
-  {
-    title: "Future Little Surprise",
-    copy: "A placeholder for the next gift you will drop in later",
-    history: "Reserved and waiting for its real image",
-    image: "assets/gifts/8.jpg",
-  },
-  {
-    title: "Another Soft Secret",
-    copy: "One more spot saved for a future surprise you want to add",
-    history: "Still wrapped and ready for customization",
-    image: "assets/gifts/9.jpg",
-  },
-  {
-    title: "Final Hidden Spot",
-    copy: "The last placeholder slot, ready whenever you are",
-    history: "Kept open for one more special reveal",
-    image: "assets/gifts/10.jpg",
-  },
 ];
 
 function applyContent() {
