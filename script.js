@@ -57,64 +57,64 @@ let currentGiftIndex = 0;
 
 const vaultGifts = [
   {
-    title: "Moonlit Memory",
-    copy: "A soft little moment saved for later, warm enough to revisit any night.",
-    history: "Unlocked first and tucked gently into the story.",
+    title: "Moonlit Owl",
+    copy: "A soft little Owl, warm enough to revisit any night",
+    history: "Unlocked first and tucked gently into the story",
     image: "assets/gifts/1.png",
   },
   {
-    title: "Golden Glow",
-    copy: "A brighter surprise with that same quiet sweetness you carry everywhere.",
-    history: "Added with a warm glow and a tiny smile.",
+    title: "Favourite Feet",
+    copy: "A soft surprise for my Favourite Feet. I know you lave lot of these but I am sure it will never be enough for your cold feet",
+    history: "Added with a warm touch to your feet",
     image: "assets/gifts/2.png",
   },
   {
-    title: "Sweet Check-In",
-    copy: "The kind of gift that feels like a message arriving exactly when it should.",
-    history: "Saved as one more soft piece of the night.",
+    title: "Little KeyChain",
+    copy: "This keychain reminds me of my first trip without you to OOTY, and how much I missed you, bubu",
+    history: "Saved as one more memory of the night",
     image: "assets/gifts/3.png",
   },
   {
-    title: "Little Spark",
-    copy: "A tiny celebration wrapped up in color, warmth, and a bit of magic.",
-    history: "Dropped into history like a spark that stayed.",
+    title: "Mini Money Vault",
+    copy: "I don't like how you keep you money in back of your mobile cover, I believe this should help",
+    history: "Dropped into history",
     image: "assets/gifts/4.png",
   },
   {
-    title: "Rosy Surprise",
-    copy: "A prettier, softer reveal for the part of the story that lingers longest.",
-    history: "Now resting in your unlocked list on the right.",
+    title: "Let's Build Life Together",
+    copy: "Like this puzzle, Life comes in bits and pieces, Let's work together and work as a team",
+    history: "Now resting it in your unlocked",
     image: "assets/gifts/5.png",
   },
   {
-    title: "Hidden Treasure",
-    copy: "Another secret opened, another memory-shaped gift brought into the light.",
-    history: "Unlocked quietly and added to your growing collection.",
+    title: "Please keep this in your Journey ahead",
+    copy: "Bubu, this is something I truly believe in and try to live by. It’s not that I know for certain that God exists, but this helps me stay moral, disciplined, and committed to you and to the other things that matter in life. I just want you to have it with you on your journey",
+    history: "A Gift that I want you to have it with you on your journey ",
     image: "assets/gifts/6.png",
   },
   {
-    title: "Last Little Wonder",
-    copy: "The final surprise in the vault, still soft, still glowing, still yours.",
-    history: "The last gift settled into place to complete the story.",
+    title: "Vault",
+    copy: "I have seen how you keep you cards and money, Let's make it secure and sctructured",
+    history: "Added to Gifts",
     image: "assets/gifts/7.png",
   },
   {
     title: "Future Little Surprise",
-    copy: "A placeholder for the next gift you will drop in later.",
-    history: "Reserved and waiting for its real image.",
-    image: "assets/gift-placeholder.svg",
+    copy: "A placeholder for the next gift you will drop in later",
+    history: "Reserved and waiting for its real image",
+    image: "assets/gifts/8.jpg",
   },
   {
     title: "Another Soft Secret",
-    copy: "One more spot saved for a future surprise you want to add.",
-    history: "Still wrapped and ready for customization.",
-    image: "assets/gift-placeholder.svg",
+    copy: "One more spot saved for a future surprise you want to add",
+    history: "Still wrapped and ready for customization",
+    image: "assets/gifts/9.jpg",
   },
   {
     title: "Final Hidden Spot",
-    copy: "The last placeholder slot, ready whenever you are.",
-    history: "Kept open for one more special reveal.",
-    image: "assets/gift-placeholder.svg",
+    copy: "The last placeholder slot, ready whenever you are",
+    history: "Kept open for one more special reveal",
+    image: "assets/gifts/10.jpg",
   },
 ];
 
@@ -467,8 +467,8 @@ function syncVaultIdleState() {
       vaultRevealPlaceholder.hidden = true;
     }
     vaultStatusBadge.textContent = CONTENT.vault?.completeBadge || "Complete";
-    vaultRevealTitle.textContent = CONTENT.vault?.completeTitle || "Every hidden gift is unlocked.";
-    vaultRevealCopy.textContent = CONTENT.vault?.completeCopy || "The full little gift list is waiting on the right now.";
+    vaultRevealTitle.textContent = CONTENT.vault?.completeTitle || "Every hidden gift is unlocked";
+    vaultRevealCopy.textContent = CONTENT.vault?.completeCopy || "The full little gift list is waiting on the right now";
     vaultBeginButton.hidden = true;
     vaultNextButton.hidden = true;
     return;
@@ -483,7 +483,7 @@ function syncVaultIdleState() {
   }
   vaultStatusBadge.textContent = CONTENT.vault?.waitingBadge || "Waiting";
   vaultRevealTitle.textContent = CONTENT.vault?.waitingTitle || "A wrapped little surprise";
-  vaultRevealCopy.textContent = CONTENT.vault?.waitingCopy || "Each unlocked gift appears here first, then slides into your history on the right so the whole story keeps building.";
+  vaultRevealCopy.textContent = CONTENT.vault?.waitingCopy || "Each unlocked gift appears here first, then slides into your history on the right so the whole story keeps building";
   vaultBeginButton.hidden = false;
   vaultNextButton.hidden = true;
 }
@@ -547,7 +547,7 @@ function handleVaultDigit(value) {
       return;
     }
 
-    window.setTimeout(() => clearVaultCode(CONTENT.config?.messages?.wrongPasscode || "Wrong passcode. Try the birthday date."), 220);
+    window.setTimeout(() => clearVaultCode(CONTENT.config?.messages?.wrongPasscode || "Wrong passcode. Try the birthday date"), 220);
   }
 }
 
@@ -585,7 +585,7 @@ function switchScreen(nextName) {
 }
 
 function unlockStory() {
-  errorMessage.textContent = CONTENT.config?.messages?.unlocked || "Unlocked.";
+  errorMessage.textContent = CONTENT.config?.messages?.unlocked || "Unlocked";
   unlockPanel?.classList.remove("is-error");
   unlockPanel?.classList.add("is-success");
   burstConfetti(window.innerWidth * 0.5, window.innerHeight * 0.45, 24);
@@ -607,7 +607,7 @@ function handleDigit(value) {
 
     unlockPanel?.classList.remove("is-success");
     unlockPanel?.classList.add("is-error");
-    window.setTimeout(() => clearCode(CONTENT.config?.messages?.wrongPasscode || "Wrong passcode. Try the birthday date."), 240);
+    window.setTimeout(() => clearCode(CONTENT.config?.messages?.wrongPasscode || "Wrong passcode. Try the birthday date"), 240);
   }
 }
 
@@ -722,7 +722,7 @@ restartButton?.addEventListener("click", () => {
     const emptyNode = document.createElement("div");
     emptyNode.className = "vault-history-empty";
     emptyNode.id = "vaultHistoryEmpty";
-    emptyNode.textContent = CONTENT.vault?.emptyHistory || "Nothing has been unlocked yet.";
+    emptyNode.textContent = CONTENT.vault?.emptyHistory || "Nothing has been unlocked yet";
     vaultHistoryList.append(emptyNode);
   }
   closeVaultModal();

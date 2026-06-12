@@ -582,6 +582,44 @@ button {
   min-height: 340px;
 }
 
+.message-screen-panel {
+  justify-content: flex-start;
+  padding-top: clamp(18px, 2.2vw, 28px);
+  padding-bottom: clamp(18px, 2.2vw, 28px);
+}
+
+.message-layout {
+  row-gap: 1rem;
+}
+
+.message-layout .portrait-reveal {
+  width: min(100%, 860px);
+  margin: 0 auto;
+}
+
+.message-layout .portrait-panel {
+  width: 100%;
+  min-height: min(44vh, 440px);
+}
+
+.message-layout .portrait-photo {
+  min-height: min(44vh, 440px);
+}
+
+.message-layout .section-copy,
+.message-layout .reveal-block,
+.message-layout .eyebrow {
+  max-width: 100%;
+}
+
+.message-layout .section-title {
+  margin-bottom: 0.75rem;
+}
+
+.message-layout .section-copy {
+  margin-bottom: 0.6rem;
+}
+
 .polaroid-main p {
   margin: 16px 6px 0;
   font-family: "Brush Script MT", cursive;
@@ -1559,6 +1597,12 @@ body:has(.crying-overlay.is-visible) .experience-shell {
     max-height: 34dvh;
   }
 
+  .message-layout .portrait-photo,
+  .message-layout .portrait-panel {
+    min-height: min(34dvh, 320px);
+    max-height: none;
+  }
+
   .keypad .btn {
     padding: 0.86rem 0;
   }
@@ -1667,6 +1711,12 @@ body:has(.crying-overlay.is-visible) .experience-shell {
   .portrait-panel {
     min-height: 220px;
     max-height: 30dvh;
+  }
+
+  .message-layout .portrait-photo,
+  .message-layout .portrait-panel {
+    min-height: min(30dvh, 260px);
+    max-height: none;
   }
 
   .polaroid-stack {
